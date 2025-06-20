@@ -1,29 +1,30 @@
-import { users } from '@/other/mockData.js';
+import { users } from "@/other/mockData.js";
 
 // Функция авторизации с имитацией Fetch API
 async function loginF(login, password) {
-  // Имитируем fetch запрос с задержкой
-  const mockResponse = await new Promise((resolve, reject) => {
+  const mockResponse = await new Promise((resolve) => {
     setTimeout(() => {
-      const user = users.find(u => u.login === login && u.password === password);
-      
+      const user = users.find(
+        (u) => u.login === login && u.password === password
+      );
+      // если данные совпали
       if (user) {
         resolve({
           ok: true,
-          json: () => Promise.resolve({ token: user.token })
+          json: () => Promise.resolve({ token: user.token }),
         });
       } else {
         resolve({
           ok: false,
           status: 401,
-          statusText: 'Unauthorized'
+          statusText: "Unauthorized",
         });
       }
     }, 1200);
   });
 
   if (!mockResponse.ok) {
-    throw new Error('Неверный логин или пароль');
+    throw new Error("Неверный логин или пароль");
   }
 
   return await mockResponse.json();
