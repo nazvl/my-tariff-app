@@ -1,14 +1,23 @@
 <script setup>
+import { loginF } from '@/services/auth.js'
 import { ref } from 'vue'
 
 let login = ref('');
 let password = ref('');
+let errorText = ref(null)
 
-// Функция отправки данных
+// Функция авторизации
 async function sendData() {
+    if (login.value && password.value) {
+        try {
+            const result = await loginF(login.value, password.value);
+            console.log(result);
+        }
+        catch(err) {
+            errorText.value = err.message;
+        }
+    }
 
-    console.log('Логин:', login.value);
-    console.log('Пароль:', password.value);
 
 }
 </script>
@@ -17,8 +26,11 @@ async function sendData() {
   <div class="login-container">
     <h1>Авторизация</h1>
     <input type="text" placeholder="Логин" v-model="login">
-    <input type="password" placeholder="Пароль" v-model="password">
+    <input type="password" placeholder="Пароль" v-model="password" >
     <button @click="sendData">Войти</button>
+    <div class="error" v-if="errorText != null">
+        <p>{{ errorText }}</p>
+    </div>
   </div>
 </template>
 
@@ -75,7 +87,15 @@ async function sendData() {
     transition: 300ms;
 
 }
+.error {
+    background-color: red;
+    border: 1px solid black;
+    color: white;
 
+    padding: 10px;
+    max-width: 300px;
+
+}
 
 .login-container button:hover {
     background-color: darkblue;
