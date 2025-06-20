@@ -9,9 +9,12 @@ async function loginF(login, password) {
       );
       // если данные совпали
       if (user) {
+        // имитация Fetch
         resolve({
           ok: true,
-          json: () => Promise.resolve({ token: user.token }),
+          status: 200,
+          statusText: "OK",
+          json: () => Promise.resolve({ token: user.token }), // имитация Fetch
         });
       } else {
         resolve({
@@ -23,7 +26,7 @@ async function loginF(login, password) {
     }, 1200);
   });
 
-  if (!mockResponse.ok) {
+  if (mockResponse.status !== 200) {
     throw new Error("Неверный логин или пароль");
   }
 
