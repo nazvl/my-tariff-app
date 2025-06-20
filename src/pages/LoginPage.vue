@@ -13,25 +13,23 @@ async function sendData() {
             const result = await loginF(login.value, password.value);
             console.log(result);
         }
-        catch(err) {
+        catch (err) {
             errorText.value = err.message;
         }
     }
-
-
 }
 </script>
 
 <template>
-  <div class="login-container">
-    <h1>Авторизация</h1>
-    <input type="text" placeholder="Логин" v-model="login">
-    <input type="password" placeholder="Пароль" v-model="password" >
-    <button @click="sendData">Войти</button>
-    <div class="error" v-if="errorText != null">
-        <p>{{ errorText }}</p>
+    <div class="login-container">
+        <h1>Авторизация</h1>
+        <input type="text" placeholder="Логин" v-model="login">
+        <input type="password" placeholder="Пароль" v-model="password">
+        <button @click="sendData">Войти</button>
+        <div class="error" v-if="errorText != null">
+            <p>{{ errorText }}</p>
+        </div>
     </div>
-  </div>
 </template>
 
 
@@ -87,6 +85,7 @@ async function sendData() {
     transition: 300ms;
 
 }
+
 .error {
     background-color: red;
     border: 1px solid black;
