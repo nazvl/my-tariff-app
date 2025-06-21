@@ -1,54 +1,8 @@
 <script setup>
-import { ref, onBeforeMount } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth.js'
-
-const authStore = useAuthStore();
-const router = useRouter();
-
-let login = ref('');
-let password = ref('');
-let errorText = ref(null);
-
-onBeforeMount(async () => {
-    await isAuthorized();
-});
-
-// функция для проверки авторизации пользователя и передачи его токена на проверку
-async function isAuthorized() {
-    // Сначала инициализируем токен из IndexedDB
-    await authStore.initAuth();
-    
-    if (authStore.isAuthenticated) {
-        router.push('/tariffs');
-    } else {
-        console.log('Пользователь не авторизован');
-    }
-}
-
-// Функция авторизации
-async function sendLogin() {
-    if (login.value && password.value) {
-        try {
-            await authStore.login(login.value, password.value);
-            // Добавлен редирект после успешного логина
-            router.push('/tariffs');
-        }
-        catch (err) {
-            errorText.value = err.message;
-        }
-    }
-}
-
-async function logout() {
-    await authStore.logout();
-}
 
 </script>
 
 <template>
-            <button @click="logout">Выйти</button>
-    <p>{{ authStore }}</p>
     <div class="login-container">
         <h1>Авторизация</h1>
         <input type="text" placeholder="Логин" v-model="login">
