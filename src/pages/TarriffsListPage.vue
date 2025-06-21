@@ -10,6 +10,7 @@ let token = ref('');
 
 onMounted(async () => {
     token.value = authStore.token;
+    syncWithServer();
     await tariffsStore.loadTariffs();
 })
 
@@ -22,9 +23,7 @@ const syncWithServer = async () => {
 <template>
     <div>
         <h1>Список тарифов</h1>
-        <button @click="syncWithServer" :disabled="tariffsStore.loading">
-            Синхронизировать с сервером
-        </button>
+
         <div v-if="tariffsStore.loading">Загрузка...</div>
         <div v-else>
             <div v-for="tariff in tariffsStore.tariffs" :key="tariff.id">

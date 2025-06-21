@@ -13,7 +13,7 @@ let dbPromise;
 
 const initDB = () => {
   if (dbPromise) {
-    return dbPromise; // Return existing promise if already initializing
+    return dbPromise;
   }
   
   dbPromise = new Promise((resolve, reject) => {
