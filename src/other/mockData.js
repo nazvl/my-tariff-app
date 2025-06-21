@@ -13,13 +13,13 @@ const users = [
 const tariffs = [
   {
     val: "T1",
-    qrs: ["qr1", "qr2"],
+    qrs: ["123456", "654312"],
     processed: true,
     created: "2025-06-20T19:00:00Z",
   },
   {
     val: "T3",
-    qrs: ["qr3"],
+    qrs: ["132356"],
     processed: false,
     created: "2025-06-19T18:30:00Z",
   },

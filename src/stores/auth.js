@@ -3,11 +3,21 @@ import { computed, ref } from "vue";
 import { loginF, validateToken } from "@/services/auth.js";
 import { saveToken, getToken, removeToken } from "@/other/idb.js";
 
+/**
+ * Pinia store для управления аутентификацией пользователя
+ * Обрабатывает состояние токена, вход, выход и валидацию
+ */
 export const useAuthStore = defineStore("auth", () => {
+  // Реактивное состояние токена аутентификации
   const token = ref("");
+
+  // Вычисляемое свойство для проверки статуса аутентификации
   const isAuthenticated = computed(() => !!token.value);
 
-  // Инициализация токена из IndexedDB
+  /**
+   * Инициализирует токен из IndexedDB при загрузке приложения
+   * Восстанавливает состояние аутентификации после перезагрузки страницы
+   */
   const initializeToken = async () => {
     const storedToken = await getToken();
     if (storedToken) {
@@ -15,6 +25,13 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  /**
+   * Выполняет аутентификацию пользователя
+   * @param {string} login - Логин пользователя
+   * @param {string} password - Пароль пользователя
+   * @returns {Promise<Object>} Ответ сервера с токеном
+   * @throws {Error} Ошибка аутентификации
+   */
   const login = async (login, password) => {
     try {
       const response = await loginF(login, password);
@@ -26,6 +43,10 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  /**
+   * Проверяет валидность текущего токена на сервере
+   * @returns {Promise<boolean>} true если токен валиден, false если нет
+   */
   const checkToken = async () => {
     if (!token.value) {
       return false;
@@ -35,18 +56,25 @@ export const useAuthStore = defineStore("auth", () => {
       const response = await validateToken(token.value);
       return response.valid;
     } catch (error) {
-      // Если токен недействителен, очищаем его
+      // Если токен недействителен или произошла ошибка, очищаем состояние
       logout();
       return false;
     }
   };
 
+  /**
+   * Выполняет выход пользователя из системы
+   * Очищает токен из памяти и IndexedDB
+   */
   const logout = async () => {
     token.value = "";
     await removeToken();
   };
 
-  // Инициализация с проверкой токена
+  /**
+   * Инициализирует состояние аутентификации при запуске приложения
+   * Загружает токен из хранилища и проверяет его валидность
+   */
   const initAuth = async () => {
     await initializeToken();
     if (token.value) {
@@ -63,6 +91,6 @@ export const useAuthStore = defineStore("auth", () => {
     login,
     logout,
     checkToken,
-    initAuth
+    initAuth,
   };
 });
