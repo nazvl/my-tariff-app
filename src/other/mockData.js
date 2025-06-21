@@ -3,6 +3,13 @@ const users = [
   { id: 2, login: "user2", password: "pass2", token: "token456" },
 ];
 
+// tariffs = <tariff>[] – массив со списком объектов примененных тарифов
+// tariff = {val: <int>, qrs: <string>[], processed: <bool>, created: <datetime>} – объект тарифа, где:
+//     • val – тариф: один из 3 вариантов;
+//     • qrs – массив qr объектов;
+//     • processed – признак обработки на стороне сервера;
+//     • created – дата и время сканирования qr по данным сканирующего устройства.
+
 const tariffs = [
   {
     val: "T1",
