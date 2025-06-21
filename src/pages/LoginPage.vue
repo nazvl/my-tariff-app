@@ -5,6 +5,7 @@ import { useAuthStore } from "@/store/auth.js";
 
 const authStore = useAuthStore();
 const router = useRouter();
+
 let username = ref(null);
 let password = ref(null);
 let errorText = ref({ text: null, color: "red" });

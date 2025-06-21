@@ -13,13 +13,13 @@
   ],
   "tariffs": [
     {
-      "val": 1,
+      "val": "T1",
       "qrs": ["QR123", "QR456"],
       "processed": true,
       "created": "2025-06-21T12:00:00.000Z"
     },
     {
-      "val": 2,
+      "val": "T2",
       "qrs": ["QR789"],
       "processed": false,
       "created": "2025-06-21T13:30:00.000Z"

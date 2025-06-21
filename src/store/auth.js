@@ -15,7 +15,6 @@ export const useAuthStore = defineStore("auth", {
         this.setAuth(result.user.login, result.token);
         await setItem("username", result.user.login);
         await setItem("token", result.token);
-        console.log(result);
         return result;
       } catch (error) {
         throw error;
