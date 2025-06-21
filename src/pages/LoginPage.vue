@@ -1,11 +1,33 @@
 <script setup>
+import { ref } from 'vue';
+import { login } from '@/api/api.js'
+
+let username = ref('');
+let password = ref('');
+let errorText = ref(null);
+if (password !== '' && login !== '') {
+
+}
+
+async function sendLogin() {
+    if (username !== '' && password !== '') {
+        try {
+            let result = await login(username.value, password.value);
+            return result;
+        }
+        catch (error) {
+            errorText.value = error.error;
+            console.log(error.error);
+        }
+    }
+}
 
 </script>
 
 <template>
     <div class="login-container">
         <h1>Авторизация</h1>
-        <input type="text" placeholder="Логин" v-model="login">
+        <input type="text" placeholder="Логин" v-model="username">
         <input type="password" placeholder="Пароль" v-model="password">
         <button @click="sendLogin">Войти</button>
         <div class="error" v-if="errorText != null">
