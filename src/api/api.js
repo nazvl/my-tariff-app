@@ -32,6 +32,6 @@ export async function getTariffs() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(tariffs);
-        }, 500);
+        }, 1200);
     });
 }

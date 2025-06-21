@@ -3,6 +3,7 @@ import LoginPage from '@/pages/LoginPage.vue'
 import TarriffsListPage from '@/pages/TarriffsListPage.vue'
 import SetTarriffPage from '@/pages/SetTarriffPage.vue'
 
+
 const routes = [
     { path: '/login', component: LoginPage },
     { path: '/tariffs', component: TarriffsListPage },

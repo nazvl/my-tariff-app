@@ -1,8 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { login } from "@/api/api.js";
 import { useRouter } from "vue-router";
-
 import { useAuthStore } from "@/store/auth.js";
 
 const authStore = useAuthStore();
@@ -11,8 +9,9 @@ let username = ref(null);
 let password = ref(null);
 let errorText = ref({ text: null, color: "red" });
 
-onMounted(() => {
-  if (authStore.checkToken()) {
+onMounted(async () => {
+  const isAuthenticated = await authStore.checkToken();
+  if (isAuthenticated) {
     console.log('Пользователь уже авторизован');
     router.push("/tariffs");
   }
@@ -30,16 +29,13 @@ async function sendLogin() {
     errorText.value.text = "Необходимо заполнить все поля";
     return;
   }
-  if (username !== null && password !== null) {
-    try {
-      let result = await login(username.value, password.value);
-      // console.log(result);
-      authStore.setAuth(result.user.login, result.token);
-      router.push("/tariffs");
-    } catch (error) {
-      errorText.value.text = error.error;
-      console.log(error.error);
-    }
+  
+  try {
+    await authStore.login(username.value, password.value);
+    router.push("/tariffs");
+  } catch (error) {
+    errorText.value.text = error.error;
+    console.log(error.error);
   }
 }
 </script>
