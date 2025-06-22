@@ -22,7 +22,7 @@ export const useTariffStore = defineStore("tariff", {
     async fetchTariffs() {
       try {
         // Загружаем существующие тарифы из локального хранилища
-        const existingTariffs = await this.loadFromIDB();
+        // const existingTariffs = await this.loadFromIDB();
 
         // Получаем актуальные тарифы из API
         const apiTariffs = await getTariffs();

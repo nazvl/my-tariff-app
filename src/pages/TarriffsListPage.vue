@@ -28,7 +28,7 @@ async function fetchTariffs() {
 }
 
 function logout() {
-  console.log(authStore.token);
+  synchronizer();
   authStore.logout();
   router.push("/login");
 }
@@ -97,7 +97,8 @@ function logout() {
   align-items: center;
 }
 
-.logout-btn {
+.logout-btn,
+.add-btn {
   background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
   color: white;
   border: none;
@@ -108,7 +109,8 @@ function logout() {
   font-weight: 500;
   transition: all 0.3s ease;
   min-height: 44px;
-  min-width: 120px;
+  flex: 1;
+  min-width: 160px;
 }
 
 .logout-btn:hover {
@@ -123,16 +125,6 @@ function logout() {
 
 .add-btn {
   background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  min-height: 44px;
-  min-width: 160px;
 }
 
 .add-btn:hover {
