@@ -1,4 +1,3 @@
-// ...existing code...
 /* Убираем все отступы и задаем box-sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -18,6 +17,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+
 }
 
 /* Стили для корневого элемента Vue */
