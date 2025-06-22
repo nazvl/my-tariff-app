@@ -32,6 +32,11 @@ export async function getTariffs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             try {
+                // Добавляем статус true каждому тарифу
+                for(let i in tariffs) {
+                    tariffs[i].processed = true;
+                }
+                
                 if (tariffs && Array.isArray(tariffs)) {
                     resolve(tariffs);
                 } else {

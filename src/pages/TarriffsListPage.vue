@@ -3,6 +3,7 @@ import { useAuthStore } from "@/store/auth.js";
 import { useTariffStore } from "@/store/tariff.js";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { synchronizer } from "../api/synchronizeWithServer";
 
 const authStore = useAuthStore();
 const tariffStore = useTariffStore();
@@ -10,8 +11,8 @@ const router = useRouter();
 
 onMounted(async () => {
   try {
-    // await tariffStore.loadFromIDB?.(); // - загрузка из idb
-    await fetchTariffs(); // обновление из сети
+    // Загружаем тарифы (включая объединение с локальными)
+    await fetchTariffs();
   } catch (err) {
     console.error("Ошибка загрузки тарифов:", err);
   }
@@ -30,6 +31,7 @@ function logout() {
   authStore.logout();
   router.push("/login");
 }
+
 </script>
 
 <template>
@@ -41,6 +43,7 @@ function logout() {
         <button @click="router.push('/apply')" class="add-btn">
           Добавить тариф
         </button>
+        <button @click="synchronizer" class="logout-btn">sync</button>
       </div>
     </div>
 
@@ -53,6 +56,9 @@ function logout() {
         <p class="tariff-val">{{ tariff.val }}</p>
         <p class="tariff-qrs">QRs: {{ tariff.qrs.join(", ") }}</p>
         <p class="tariff-created">Создан: {{ tariff.created.split("T")[0] }}</p>
+        <p class="tariff-created">
+          Обработан: {{ tariff.processed ? "Да" : "Нет" }}
+        </p>
       </div>
     </div>
 
