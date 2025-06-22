@@ -16,13 +16,11 @@ export const useTariffStore = defineStore("tariff", {
         return cached;
       }
       return [];
-    },
-
-    // Получение тарифов из API с объединением локальных данных
+    },    // Получение тарифов из API с объединением локальных данных
     async fetchTariffs() {
       try {
         // Загружаем существующие тарифы из локального хранилища
-        // const existingTariffs = await this.loadFromIDB();
+        const existingTariffs = await this.loadFromIDB();
 
         // Получаем актуальные тарифы из API
         const apiTariffs = await getTariffs();
