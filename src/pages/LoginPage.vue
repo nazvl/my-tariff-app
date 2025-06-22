@@ -73,7 +73,6 @@ async function sendLogin() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   height: 100dvh;
   min-height: -webkit-fill-available;
   gap: 1rem;
