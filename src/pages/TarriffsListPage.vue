@@ -66,7 +66,6 @@ function logout() {
   </div>
 </template>
 
-// ...existing code...
 <style scoped>
 .container {
   margin: 0 auto;

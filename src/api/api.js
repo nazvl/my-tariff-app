@@ -27,7 +27,7 @@ export async function login(username, password) {
         }, 1200);
     });
 }
-
+// Получение тарифов от "сервера"
 export async function getTariffs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -49,6 +49,6 @@ export async function getTariffs() {
                     error: 'Ошибка при загрузке тарифов'
                 });
             }
-        }, 6000);
+        }, 2000);
     });
 }

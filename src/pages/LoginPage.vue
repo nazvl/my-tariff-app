@@ -66,7 +66,7 @@ async function sendLogin() {
   </div>
 </template>
 
-// ...existing code...
+
 <style scoped>
 .login-container {
   display: flex;
