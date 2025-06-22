@@ -3,7 +3,7 @@ import { useAuthStore } from "@/store/auth.js";
 import { useTariffStore } from "@/store/tariff.js";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { synchronizer } from "../api/synchronizeWithServer";
+import { synchronizer } from "@/api/synchronizeWithServer";
 
 const authStore = useAuthStore();
 const tariffStore = useTariffStore();
@@ -12,6 +12,7 @@ const router = useRouter();
 onMounted(async () => {
   try {
     // Загружаем тарифы (включая объединение с локальными)
+    await synchronizer()
     await fetchTariffs();
   } catch (err) {
     console.error("Ошибка загрузки тарифов:", err);
@@ -43,7 +44,7 @@ function logout() {
         <button @click="router.push('/apply')" class="add-btn">
           Добавить тариф
         </button>
-        <button @click="synchronizer" class="logout-btn">sync</button>
+        <!-- <button @click="synchronizer" class="logout-btn">sync</button> -->
       </div>
     </div>
 
