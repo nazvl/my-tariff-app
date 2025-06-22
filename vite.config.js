@@ -13,7 +13,7 @@ export default defineConfig({
         short_name: "Tariffs",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffff",
+        background_color: "#ecf6ec",
         permissions: ["camera"],
         icons: [
           { src: "/logo.png", sizes: "192x192", type: "image/png" },
