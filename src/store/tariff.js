@@ -16,7 +16,7 @@ export const useTariffStore = defineStore("tariff", {
       }
       return [];
     },
-    
+
     async fetchTariffs() {
       try {
         let result = await getTariffs();
@@ -27,6 +27,11 @@ export const useTariffStore = defineStore("tariff", {
         console.error("Ошибка при загрузке тарифов:", error);
         throw error;
       }
+    },
+
+    async addTariff(newTariff) {
+      this.tariffs.push(newTariff);
+      await setItem("tariffs", this.tariffs);
     },
   },
 });

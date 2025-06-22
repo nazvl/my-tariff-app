@@ -8,7 +8,6 @@ const authStore = useAuthStore();
 const tariffStore = useTariffStore();
 const router = useRouter();
 
-
 onMounted(async () => {
   try {
     // await tariffStore.loadFromIDB?.(); // - загрузка из idb
@@ -37,11 +36,20 @@ function logout() {
   <div class="container">
     <div class="header">
       <h1 class="title">Список тарифов</h1>
-      <button @click="logout" class="logout-btn">ВЫХОД</button>
+      <div class="btns">
+        <button @click="logout" class="logout-btn">ВЫХОД</button>
+        <button @click="router.push('/apply')" class="add-btn">
+          Добавить тариф
+        </button>
+      </div>
     </div>
 
     <div v-if="tariffStore.tariffs.length" class="tariffs-grid">
-      <div v-for="tariff in tariffStore.tariffs" :key="tariff.id" class="tariff-card">
+      <div
+        v-for="tariff in tariffStore.tariffs"
+        :key="tariff.id"
+        class="tariff-card"
+      >
         <p class="tariff-val">{{ tariff.val }}</p>
         <p class="tariff-qrs">QRs: {{ tariff.qrs.join(", ") }}</p>
         <p class="tariff-created">Создан: {{ tariff.created.split("T")[0] }}</p>
@@ -73,6 +81,12 @@ function logout() {
   top: 20px;
   z-index: 10;
 }
+.btns {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
 .logout-btn {
   background-color: #f44336;
@@ -85,7 +99,7 @@ function logout() {
   font-weight: 500;
   transition: all 0.3s ease;
   min-height: 44px;
-  min-width: 44px;
+  min-width: 120px;
 }
 
 .logout-btn:hover {
@@ -94,6 +108,29 @@ function logout() {
 }
 
 .logout-btn:active {
+  transform: translateY(0);
+}
+
+.add-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  min-width: 160px;
+}
+
+.add-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.add-btn:active {
   transform: translateY(0);
 }
 
