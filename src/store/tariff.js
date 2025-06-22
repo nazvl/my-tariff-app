@@ -54,6 +54,7 @@ export const useTariffStore = defineStore("tariff", {
     // Добавление нового тарифа в список и сохранение в IndexedDB
     async addTariff(newTariff) {
       this.tariffs.push(newTariff);
+      
       // Преобразуем в обычные объекты для сохранения в IndexedDB
       const plainTariffs = JSON.parse(JSON.stringify(this.tariffs));
       await setItem("tariffs", plainTariffs);

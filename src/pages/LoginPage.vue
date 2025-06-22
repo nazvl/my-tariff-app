@@ -1,9 +1,10 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/store/auth.js";
-
+import { useTariffStore } from "../store/tariff";
 const authStore = useAuthStore();
+const tariffStore = useTariffStore()
 const router = useRouter();
 
 let username = ref(null);
@@ -17,6 +18,14 @@ onMounted(async () => {
     router.push("/tariffs");
   }
 });
+
+// onBeforeUnmount(async () => {
+//     const isAuthenticated = await authStore.checkToken();
+//     if (isAuthenticated) {
+//       tariffStore.loadFromIDB(); // подгрузка из idb 
+//     }
+//   }
+// )
 
 async function sendLogin() {
   errorText.value.text = null;

@@ -49,6 +49,6 @@ export async function getTariffs() {
                     error: 'Ошибка при загрузке тарифов'
                 });
             }
-        }, 1200);
+        }, 6000);
     });
 }
