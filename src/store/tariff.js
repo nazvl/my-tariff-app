@@ -31,7 +31,9 @@ export const useTariffStore = defineStore("tariff", {
 
     async addTariff(newTariff) {
       this.tariffs.push(newTariff);
-      await setItem("tariffs", this.tariffs);
+      // Convert to plain objects before saving to IndexedDB
+      const plainTariffs = JSON.parse(JSON.stringify(this.tariffs));
+      await setItem("tariffs", plainTariffs);
     },
   },
 });

@@ -22,10 +22,6 @@ onMounted(async () => {
   }
 })
 
-function startScanning() {
-  isScanning.value = true
-}
-
 function onDetect(detectedCodes) {
   if (detectedCodes.length > 0) {
     scannedQR.value = detectedCodes[0].rawValue
@@ -48,16 +44,18 @@ async function applyTariff() {
     created: new Date().toISOString()
   }
 
-  await tariffStore.addTariff(newTariff)
+  // Convert to plain object to avoid proxy issues
+  const plainTariff = JSON.parse(JSON.stringify(newTariff))
+  await tariffStore.addTariff(plainTariff)
   router.push('/tariffs')
 }
+
 </script>
 
 <template>
   <div class="container">
     <h1>Установка тарифа</h1>
     
-    <!-- Селектор тарифа -->
     <div class="tariff-selector">
       <label>Выберите тариф:</label>
       <select v-model="selectedTariff">
@@ -67,13 +65,10 @@ async function applyTariff() {
       </select>
     </div>
 
-    <!-- QR сканер -->
     <div class="qr-section">
       <div v-if="!isScanning">
-        <button @click="startScanning">Начать сканирование QR</button>
-        <div v-if="scannedQR">
-          QR: {{ scannedQR }}
-        </div>
+        <button @click="isScanning = true">Начать сканирование QR</button>
+        <div v-if="scannedQR">QR: {{ scannedQR }}</div>
       </div>
 
       <div v-if="isScanning">
@@ -81,7 +76,6 @@ async function applyTariff() {
       </div>
     </div>
 
-    <!-- Кнопка применения тарифа -->
     <button @click="applyTariff" :disabled="!scannedQR">
       Применить тариф
     </button>
