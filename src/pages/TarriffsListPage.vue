@@ -66,12 +66,13 @@ function logout() {
   </div>
 </template>
 
+// ...existing code...
 <style scoped>
 .container {
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
 }
 
 .header {
@@ -82,11 +83,13 @@ function logout() {
   padding: 20px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
   position: sticky;
   top: 20px;
   z-index: 10;
+  border: 1px solid #e8f5e8;
 }
+
 .btns {
   display: flex;
   gap: 15px;
@@ -95,7 +98,7 @@ function logout() {
 }
 
 .logout-btn {
-  background-color: #f44336;
+  background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -109,8 +112,9 @@ function logout() {
 }
 
 .logout-btn:hover {
-  background-color: #d32f2f;
+  background: linear-gradient(135deg, #ff5722 0%, #e64a19 100%);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 112, 67, 0.3);
 }
 
 .logout-btn:active {
@@ -118,7 +122,7 @@ function logout() {
 }
 
 .add-btn {
-  background-color: #4caf50;
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -132,8 +136,9 @@ function logout() {
 }
 
 .add-btn:hover {
-  background-color: #45a049;
+  background: linear-gradient(135deg, #45a049 0%, #388e3c 100%);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .add-btn:active {
@@ -142,8 +147,8 @@ function logout() {
 
 .title {
   font-size: 24px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: #2e7d32;
   margin: 0;
 }
 
@@ -156,10 +161,10 @@ function logout() {
 
 .tariff-card {
   background: white;
-  border: none;
+  border: 1px solid #e8f5e8;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(76, 175, 80, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
@@ -168,7 +173,8 @@ function logout() {
 
 .tariff-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.15);
+  border-color: #c8e6c9;
 }
 
 .tariff-card:active {
@@ -178,14 +184,14 @@ function logout() {
 .tariff-val {
   font-size: 20px;
   font-weight: bold;
-  color: #2196f3;
+  color: #2e7d32;
   margin-bottom: 12px;
   line-height: 1.3;
 }
 
 .tariff-qrs {
   font-size: 16px;
-  color: #666;
+  color: #4caf50;
   margin-bottom: 12px;
   line-height: 1.4;
   word-break: break-word;
@@ -193,7 +199,7 @@ function logout() {
 
 .tariff-created {
   font-size: 14px;
-  color: #999;
+  color: #81c784;
   margin-bottom: 0;
   line-height: 1.4;
 }
@@ -201,20 +207,22 @@ function logout() {
 .loading {
   text-align: center;
   font-size: 18px;
-  color: #666;
+  color: #4caf50;
   padding: 60px 20px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+  border: 1px solid #e8f5e8;
 }
 
 .no-tariffs {
   text-align: center;
-  color: #666;
+  color: #4caf50;
   padding: 60px 20px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+  border: 1px solid #e8f5e8;
 }
 
 /* Mobile optimizations */
@@ -255,11 +263,16 @@ function logout() {
 @media (hover: none) {
   .tariff-card:hover {
     transform: none;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 12px rgba(76, 175, 80, 0.08);
   }
 
   .logout-btn:hover {
-    background-color: #f44336;
+    background: linear-gradient(135deg, #ff7043 0%, #ff5722 100%);
+    transform: none;
+  }
+
+  .add-btn:hover {
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
     transform: none;
   }
 }

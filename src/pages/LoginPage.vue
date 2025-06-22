@@ -57,6 +57,7 @@ async function sendLogin() {
   </div>
 </template>
 
+// ...existing code...
 <style scoped>
 .login-container {
   display: flex;
@@ -71,6 +72,7 @@ async function sendLogin() {
   font-family: "Arial", sans-serif;
   box-sizing: border-box;
   overflow: hidden;
+  background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
 }
 
 .login-container h1 {
@@ -78,62 +80,69 @@ async function sendLogin() {
   margin: 0;
   margin-bottom: 1rem;
   flex-shrink: 0;
+  color: #2e7d32;
+  font-weight: 600;
 }
 
 .login-container input {
   width: 100%;
   max-width: 300px;
   padding: 0.8rem 1rem;
-  border: none;
+  border: 2px solid #a5d6a7;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  border: 1px solid black;
   box-sizing: border-box;
   flex-shrink: 0;
+  background: white;
 }
 
 .login-container input:focus {
   outline: none;
+  border-color: #4caf50;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
 }
 
 .login-container input::placeholder {
-  color: #999;
+  color: #81c784;
 }
 
 .login-container button {
   padding: 0.8rem 1rem;
-  background-color: white;
-  border-radius: 5px;
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  border-radius: 8px;
   width: 100%;
   max-width: 300px;
   font-size: 16px;
   color: white;
-  background-color: blue;
-  transition: 300ms;
+  transition: all 0.3s ease;
   border: none;
   box-sizing: border-box;
   flex-shrink: 0;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background: linear-gradient(135deg, #45a049 0%, #388e3c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .error {
-  background-color: red;
-  border: 1px solid black;
+  background-color: #ffebee;
+  border: 2px solid #e57373;
   padding: 0.5rem;
   max-width: 300px;
-  color: black;
-  border-radius: 5px;
+  color: #d32f2f;
+  border-radius: 8px;
   text-align: center;
   flex-shrink: 0;
 }
 
 .error p {
   margin: 0;
-}
-
-.login-container button:hover {
-  background-color: darkblue;
 }
 
 @media (max-height: 600px) {
