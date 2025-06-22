@@ -12,7 +12,7 @@ let password = ref(null);
 let errorText = ref({ text: null, color: "red" });
 
 onMounted(async () => {
-  const isAuthenticated = await authStore.checkToken();
+  const isAuthenticated = await authStore.checkToken(); // проверка авторизации
   if (isAuthenticated) {
     console.log('Пользователь уже авторизован');
     router.push("/tariffs");
@@ -27,8 +27,11 @@ onMounted(async () => {
 //   }
 // )
 
+//функция для авторизации
 async function sendLogin() {
+  
   errorText.value.text = null;
+  //проверка, что поля не пусты
   if (
     !username.value ||
     !password.value ||
@@ -41,11 +44,11 @@ async function sendLogin() {
   }
   
   try {
-    await authStore.login(username.value, password.value);
-    router.push("/tariffs");
+    await authStore.login(username.value, password.value); // авторизация через метод в store
+    router.push("/tariffs"); // переход на страницу 2
   } catch (error) {
     errorText.value.text = error.error;
-    console.log(error.error);
+    console.log(error.error); // вывод ошибки в случае ошибки
   }
 }
 </script>
