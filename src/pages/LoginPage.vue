@@ -1,23 +1,11 @@
 <script setup>
 import { onMounted, ref } from "vue";
-<<<<<<< HEAD
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/store/auth.js";
 
 const authStore = useAuthStore();
 const router = useRouter();
 
-<<<<<<< HEAD
-=======
-import { login } from "@/api/api.js";
-import { useRouter } from "vue-router";
-import { useAuthStore } from "@/store/auth.js";
-
-const authStore = useAuthStore();
-const router = useRouter();
->>>>>>> de5c56f (realizated login (temporary with localstorage))
-=======
->>>>>>> a7eac7b (Refactor tariff values to strings in mock data, enhance tariff fetching logic, and improve UI for tariffs list)
 let username = ref(null);
 let password = ref(null);
 let errorText = ref({ text: null, color: "red" });
@@ -75,28 +63,34 @@ async function sendLogin() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  gap: 1.5rem;
-  padding: 2rem;
+  height: 100vh;
+  height: 100dvh;
+  min-height: -webkit-fill-available;
+  gap: 1rem;
+  padding: 1rem;
   font-family: "Arial", sans-serif;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .login-container h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  margin: 0;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .login-container input {
   width: 100%;
   max-width: 300px;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
   border: 1px solid black;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .login-container input:focus {
@@ -109,7 +103,7 @@ async function sendLogin() {
 }
 
 .login-container button {
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1rem;
   background-color: white;
   border-radius: 5px;
   width: 100%;
@@ -118,17 +112,38 @@ async function sendLogin() {
   color: white;
   background-color: blue;
   transition: 300ms;
+  border: none;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .error {
   background-color: red;
   border: 1px solid black;
-  padding: 10px;
+  padding: 0.5rem;
   max-width: 300px;
   color: black;
+  border-radius: 5px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.error p {
+  margin: 0;
 }
 
 .login-container button:hover {
   background-color: darkblue;
+}
+
+@media (max-height: 600px) {
+  .login-container {
+    gap: 0.5rem;
+  }
+  
+  .login-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
 </style>
