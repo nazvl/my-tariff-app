@@ -1,59 +1,77 @@
 <script setup>
+
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { QrcodeStream } from 'vue-qrcode-reader'
 import { useAuthStore } from '@/store/auth.js'
 import { useTariffStore } from '@/store/tariff.js'
+import { synchronizer } from  '@/api/synchronizeWithServer.js'
 
+
+// Инициализация роутера и хранилищ
 const router = useRouter()
 const authStore = useAuthStore()
 const tariffStore = useTariffStore()
 
-const selectedTariff = ref('T1')
-const scannedQR = ref('')
-const isScanning = ref(false)
+// Реактивные переменные состояния
+const selectedTariff = ref('T1') // Выбранный тариф (по умолчанию T1)
+const scannedQR = ref('') // Отсканированное значение QR-кода
+const isScanning = ref(false) // Флаг активности сканирования
 
+// Доступные варианты тарифов
 const tariffOptions = ['T1', 'T2', 'T3']
 
+// Проверка аутентификации при монтировании компонента
 onMounted(async () => {
   const isAuthenticated = await authStore.checkToken()
+
   if (!isAuthenticated) {
     router.push('/login')
   }
 })
 
+// Обработчик успешного сканирования QR-кода
 function onDetect(detectedCodes) {
   if (detectedCodes.length > 0) {
+    // Сохраняем значение первого найденного QR-кода
     scannedQR.value = detectedCodes[0].rawValue
     isScanning.value = false
   }
 }
 
+// Обработчик ошибок сканирования
 function onError(error) {
   console.error('Ошибка сканирования:', error)
   isScanning.value = false
 }
 
+// Функция применения тарифа
 async function applyTariff() {
+  // Проверяем, что QR-код отсканирован
   if (!scannedQR.value) return
 
+  // Создаем объект нового тарифа
   const newTariff = {
-    val: selectedTariff.value,
-    qrs: [scannedQR.value],
-    processed: false,
-    created: new Date().toISOString()
+    val: selectedTariff.value, // Выбранный тариф
+    qrs: [scannedQR.value], // Массив QR-кодов
+    processed: false, // Флаг обработки
+    created: new Date().toISOString() // Дата создания
   }
 
-  // Convert to plain object to avoid proxy issues
+  // Преобразуем в обычный объект (убираем реактивность)
   const plainTariff = JSON.parse(JSON.stringify(newTariff))
+  // Добавляем тариф в хранилище
   await tariffStore.addTariff(plainTariff)
+  synchronizer();
+
+  // Переходим на страницу списка тарифов
   router.push('/tariffs')
 }
 
+// Функция возврата на предыдущую страницу
 function goBack() {
   router.push('/tariffs')
 }
-
 </script>
 
 <template>
