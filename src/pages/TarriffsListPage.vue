@@ -71,7 +71,7 @@ function logout() {
 .container {
   margin: 0 auto;
   padding: 20px;
-  min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
 }
 
