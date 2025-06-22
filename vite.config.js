@@ -14,6 +14,7 @@ export default defineConfig({
         start_url: "/",
         display: "standalone",
         background_color: "#ecf6ec",
+        theme_color: "#ecf6ec",
         permissions: ["camera"],
         icons: [
           { src: "/logo.png", sizes: "192x192", type: "image/png" },
