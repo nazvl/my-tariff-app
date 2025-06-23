@@ -10,12 +10,20 @@ const tariffStore = useTariffStore();
 const router = useRouter();
 
 onMounted(async () => {
-  try {
-    // Загружаем тарифы (включая объединение с локальными)
-    await synchronizer()
-    await fetchTariffs();
-  } catch (err) {
-    console.error("Ошибка загрузки тарифов:", err);
+  if (navigator.onLine) { // проверка на наличие интернета
+    try {
+      // Загружаем тарифы (включая объединение с локальными)
+      await synchronizer();
+      await fetchTariffs();
+    } catch (err) {
+      console.error("Ошибка загрузки тарифов:", err);
+    }
+  } else { // иначе берем из idb
+    try {
+      await tariffStore.loadFromIDB();
+    } catch (err) {
+      console.error("Ошибка загрузки тарифов:", err);
+    }
   }
 });
 
@@ -32,7 +40,6 @@ function logout() {
   authStore.logout();
   router.push("/login");
 }
-
 </script>
 
 <template>
